@@ -37,7 +37,7 @@
 
 const { XMLParser } = require("fast-xml-parser"); // Imports XMLParser to convert XML API responses into JavaScript objects.
 
-const BASE_URL = "https://parabank.parasoft.com/parabank/services/bank"; // Stores the common API base URL so we don't repeat it in every method.
+const BASE_URL = "https://parabank.parasoft.com/parabankv2/services/bank"; // Stores the common API base URL so we don't repeat it in every method.
 
 class BankApi {
   // Creates a class that contains reusable ParaBank API methods.
@@ -76,16 +76,47 @@ class BankApi {
     ); // Ends the POST request.
   }
 
+  // async getFirstAccountId(customerId) {
+  //   // Creates a reusable method to retrieve the first account ID for a customer.
+  //   const response = await this.getCustomerAccounts(customerId); // Reuses getCustomerAccounts() instead of writing the API request again.
+  //   const body = await response.text(); // Reads the XML response body as text.
+  //   const parser = new XMLParser(); // Creates an XML parser to convert the XML into a JavaScript object.
+  //   const data = parser.parse(body); // Converts the XML response into a JavaScript object.
+  //   const accounts = data.accounts.account; // Gets the account data from the parsed response.
+  //   return Array.isArray(accounts) ? accounts[0].id : accounts.id; // Returns the first account ID whether one or multiple accounts were returned.
+  // }
+
   async getFirstAccountId(customerId) {
-    // Creates a reusable method to retrieve the first account ID for a customer.
-    const response = await this.getCustomerAccounts(customerId); // Reuses getCustomerAccounts() instead of writing the API request again.
-    const body = await response.text(); // Reads the XML response body as text.
-    const parser = new XMLParser(); // Creates an XML parser to convert the XML into a JavaScript object.
-    const data = parser.parse(body); // Converts the XML response into a JavaScript object.
-    const accounts = data.accounts.account; // Gets the account data from the parsed response.
-    return Array.isArray(accounts) ? accounts[0].id : accounts.id; // Returns the first account ID whether one or multiple accounts were returned.
+  const response = await this.getCustomerAccounts(customerId);
+
+  const status = response.status();
+  const body = await response.text();
+
+  console.log("Customer ID:", customerId);
+  console.log("API Status:", status);
+  console.log("API Response:", body);
+
+  if (!response.ok()) {
+    throw new Error(
+      `getCustomerAccounts API failed. Status: ${status}. Customer ID: ${customerId}`,
+    );
   }
 
+  const parser = new XMLParser();
+  const data = parser.parse(body);
+
+  console.log("Parsed API Response:", data);
+
+  const accounts = data?.accounts?.account;
+
+  if (!accounts) {
+    throw new Error(
+      `Account data not found for customer ${customerId}. API response structure is different.`,
+    );
+  }
+
+  return Array.isArray(accounts) ? accounts[0].id : accounts.id;
+}
   async getAccountBalance(accountId) {
   const response = await this.getAccount(accountId);
   const data = await this.parseXmlResponse(response);

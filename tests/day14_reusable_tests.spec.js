@@ -14,8 +14,8 @@ test("day14 -  Valid Login", async ({ page }) => {
 });
 
 test("Day14- Check Login Fields", async ({ page }) => {
-  await expect(loginPage.usernameInput).toBeVisible();
-  await expect(loginPage.passwordInput).toBeVisible();
+  await expect(loginPage.username).toBeVisible();
+  await expect(loginPage.password).toBeVisible();
   await expect(loginPage.loginButton).toBeVisible();
 });
 

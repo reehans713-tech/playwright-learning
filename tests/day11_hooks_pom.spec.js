@@ -8,8 +8,8 @@ test.describe("Day11- Login Test Suite", () => {
   });
 
   test("Day11 - Verify Login Page", async ({ page }) => {
-    await expect(loginPage.usernameInput).toBeVisible();
-    await expect(loginPage.passwordInput).toBeVisible();
+    await expect(loginPage.username).toBeVisible();
+    await expect(loginPage.password).toBeVisible();
     await expect(loginPage.loginButton).toBeVisible();
   });
 
@@ -27,6 +27,6 @@ test.describe("Day11- Login Test Suite", () => {
   });
   test("Day11- Blank Login using POM", async ({ page }) => {
     await loginPage.login();
-    await expect(loginPage.blankLoginError).toBeVisible();
+    await expect(loginPage.loginError).toBeVisible();
   });
 });

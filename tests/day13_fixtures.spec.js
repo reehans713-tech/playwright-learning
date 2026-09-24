@@ -8,8 +8,8 @@ const test = base.extend({
   },
 });
 test("Day13- Verify Login Page Using Fixture", async ({ loginPage }) => {
-  await expect(loginPage.usernameInput).toBeVisible();
-  await expect(loginPage.passwordInput).toBeVisible();
+  await expect(loginPage.username).toBeVisible();
+  await expect(loginPage.password).toBeVisible();
   await expect(loginPage.loginButton).toBeVisible();
 });
 
@@ -20,12 +20,13 @@ test("Day13- Valid Login using Fixture", async ({ loginPage }) => {
 
 test("Day13- Invalid Login using Fixture", async ({ loginPage }) => {
   await loginPage.login("wronguser123", "wrongpassword");
-  await expect(loginPage.page).toHaveURL(/overview\.htm/);
+  await expect(loginPage.loginError).toBeVisible();
+  //await expect(loginPage.page).toHaveURL(/overview\.htm/);
 });
 
 test("Day13- Fixture Reuse Test", async ({ loginPage }) => {
-  await expect(loginPage.usernameInput).toBeVisible();
-  await expect(loginPage.passwordInput).toBeVisible();
+  await expect(loginPage.username).toBeVisible();
+  await expect(loginPage.password).toBeVisible();
   await expect(loginPage.loginButton).toBeVisible();
 
   console.log("LoginPage fixture is ready for this test");

@@ -9,9 +9,9 @@ test.beforeEach(async ({ page }) => {
 });
 
 test("Day17.1 - Playwright Auto Wait", async () => {
-  await expect(loginPage.usernameInput).toBeVisible();
-  await loginPage.usernameInput.fill("john");
-  await expect(loginPage.usernameInput).toHaveValue("john");
+  await expect(loginPage.username).toBeVisible();
+  await loginPage.username.fill("john");
+  await expect(loginPage.username).toHaveValue("john");
 });
 
 test("Day17.1 - Explict Wait Example", async ({ page }) => {
@@ -22,8 +22,8 @@ test("Day17.1 - Explict Wait Example", async ({ page }) => {
 });
 
 test("Day17.1 - Auto Wait Preffered", async () => {
-  await loginPage.usernameInput.fill("john");
-  await expect(loginPage.usernameInput).toHaveValue("john");
+  await loginPage.username.fill("john");
+  await expect(loginPage.username).toHaveValue("john");
   await expect(loginPage.loginButton).toBeVisible();
 });
 
@@ -34,7 +34,7 @@ test("Day17.1- Load State", async ({ page }) => {
 });
 
 test("Day17.2 - Wait for Element State", async () => {
-  const username = loginPage.usernameInput;
+  const username = loginPage.username;
   await expect(username).toBeVisible();
   await expect(username).toBeEnabled();
   await username.fill("john");
@@ -49,8 +49,8 @@ test("Day17.3 - Wait for URL Change", async () => {
 test("Day17.3 - Wait for Login Button", async () => {
   await expect(loginPage.loginButton).toBeVisible();
   await expect(loginPage.loginButton).toBeEnabled();
-  await loginPage.usernameInput.fill("john");
-  await loginPage.passwordInput.fill("demo");
+  await loginPage.username.fill("john");
+  await loginPage.password.fill("demo");
   await expect(loginPage.loginButton).toBeEnabled();
 });
 

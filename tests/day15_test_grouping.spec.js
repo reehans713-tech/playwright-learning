@@ -10,8 +10,8 @@ test.describe("Login Test", () => {
   });
 
   test("Check Login Fields", async () => {
-    await expect(loginPage.usernameInput).toBeVisible();
-    await expect(loginPage.passwordInput).toBeVisible();
+    await expect(loginPage.username).toBeVisible();
+    await expect(loginPage.password).toBeVisible();
     await expect(loginPage.loginButton).toBeVisible();
   });
   test("Valid Login", async ({ page }) => {

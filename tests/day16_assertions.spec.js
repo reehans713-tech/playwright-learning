@@ -15,10 +15,10 @@ test("Day16 - Verify Login Button", async () => {
 });
 
 test("Day16 - Verify Username Field", async () => {
-  loginPage.usernameInput.fill("john");
+  loginPage.username.fill("john");
 
-  await expect(loginPage.usernameInput).toHaveValue("john");
-  await expect(loginPage.usernameInput).toHaveAttribute("name", "username");
+  await expect(loginPage.username).toHaveValue("john");
+  await expect(loginPage.username).toHaveAttribute("name", "username");
 });
 
 test("Day16 - Verify Login Button Text", async () => {
@@ -27,8 +27,8 @@ test("Day16 - Verify Login Button Text", async () => {
 });
 
 test("Day16 - Verify Password Field", async () => {
-  await expect(loginPage.passwordInput).toHaveAttribute("name", "password");
-  await expect(loginPage.passwordInput).toHaveAttribute("type", "password");
+  await expect(loginPage.password).toHaveAttribute("name", "password");
+  await expect(loginPage.password).toHaveAttribute("type", "password");
 });
 
 test("Day16 - Verify Non Existing Element", async () => {
