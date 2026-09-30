@@ -14,8 +14,8 @@ test.describe("ParaBank Login Module", () => {
   test.describe("Login UI Tests", () => {
 
     test("Check Login Fields", async () => {
-      await expect(loginPage.usernameInput).toBeVisible();
-      await expect(loginPage.passwordInput).toBeVisible();
+      await expect(loginPage.username).toBeVisible();
+      await expect(loginPage.password).toBeVisible();
       await expect(loginPage.loginButton).toBeVisible();
     });
 
